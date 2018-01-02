@@ -1,25 +1,3 @@
-#CC :=g++ #compiler
-#CC := clang --analyze
-#SRCDIR := src
-#BUILDDIR := build
-#TARGET := bin/runner
-
-#SRCTEXT := cpp
-#SOURCES := $(SRCDIR)/main.cpp, $(SRCDIR)/listFunctions.cpp, $(SRCDIR)/mainFunctions.cpp
-#OBJECTS := $(BUILDDIR)/main.o, $(BUILDDIR)/listFunctions.o, $(BUILDDIR)/mainFunctions.o
-#CFLAGS=-c -Wall -std=c++11
-#INC := -I include
-
-#$(TARGET): $(OBJECTS)
-	#$(CC) $(OBJECTS) -o $(TARGET)
-
-#$(OBJECTS): $(SOURCES)
-	#$mkdir -p $(BUILDDIR)
-	#$(CC) $(CFLAGS) -o $(SOURCES)
-
-#clean:
-	#$(RM) -r $(BUILDDIR) $(TARGET)
-
 CC=g++
 CFLAGS=-c -Wall -std=c++11
 INC := -I include
