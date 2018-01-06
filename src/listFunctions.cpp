@@ -130,11 +130,12 @@ void addPersonTo(vector<Person> &personer){
           cin >> choice;
           printLine();
           //necessary?
-          cin.get();
-        } while(!(choice == '1' || choice == '2'));
+          //cin.get();
+        } while(!(choice == 1 || choice == 2));
       if(choice == 1){
         finished = false;
       } else if(choice == 2) {
+        cout << "choice 2" << endl;
         finished = true;
       }
     } else {
