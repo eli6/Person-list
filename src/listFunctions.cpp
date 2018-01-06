@@ -299,8 +299,10 @@ void sortBy(SortType type, vector <Person> personer){
       sort(personer.begin(), personer.end(), lengthSort);
       break;
   }
-  printHeadlines();
-  for(auto p: personer){
-    printPersonData(p, 0);
-  }
+  printOnScreen(personer);
+}
+
+void randomize(vector <Person> personer){
+  random_shuffle(personer.begin(), personer.end());
+  printOnScreen(personer);
 }

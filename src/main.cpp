@@ -24,6 +24,7 @@ int main() {
     "Sortera efter namn",
     "Sortera efter signatur",
     "Sortera efter största längd",
+    "Slumpa listan",
     "Avsluta"
   };
 
@@ -63,10 +64,12 @@ int main() {
           break;
         case 7: sortBy(length, personer);
           break;
-        case 8:
+        case 8: randomize(personer);
+          break;
+        case 9:
           break;
       }
-  } while(choice!=8);
+  } while(choice!=9);
 
 
   return 0;

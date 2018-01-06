@@ -95,4 +95,11 @@
   */
   void sortBy(SortType type, vector <Person> personer);
 
+  /**
+      Slumpar listan
+
+      @param personer: kopia av listan med personer
+  */
+  void randomize(vector <Person> personer);
+
 #endif
