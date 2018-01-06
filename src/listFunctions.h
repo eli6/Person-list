@@ -9,9 +9,11 @@
   #include <vector>
   #include <string>
   #include <iomanip>
+  #include <algorithm>
   #include "constants.h"
 
   using namespace std;
+
 
 
   char userWantsToRepeat(string question);
@@ -71,5 +73,7 @@
       @param personer: referens till listan med personer
   */
   void removeFrom(vector <Person> &personer);
+
+  void sortBy(SortType type, vector <Person> & personer);
 
 #endif

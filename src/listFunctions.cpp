@@ -4,6 +4,11 @@
 
 #include "listFunctions.h"
 #include "mainFunctions.h"
+#include "constants.h"
+
+bool signatureSort(const Person &a, const Person &b){
+  return a.signature < b.signature;
+}
 
 char userWantsToRepeat(string question){
   char again;
@@ -87,7 +92,12 @@ void printHeadlines(){
 
 void printPersonData(Person p, int number){
   cout << fixed << setprecision(2);
-  cout << setw(15) << left << to_string(number) + ". " << setw(18) << left << p.signature << setw(20) << left << fixed << p.firstName + " " + p.lastName << setw(15) << right << p.length << endl;
+  if(number > 0){
+    cout << setw(15) << left << to_string(number) + ". ";
+  } else {
+    cout << setw(15) << left << "--";
+  }
+  cout << setw(18) << left << p.signature << setw(20) << left << fixed << p.firstName + " " + p.lastName << setw(15) << right << p.length << endl;
 }
 
 void addPersonTo(vector<Person> &personer){
@@ -192,8 +202,6 @@ void printOnScreen(vector<Person> personer){
       }
       tracker++;
     }
-
-
     // If there are persons left to display: asks if the user wants to display them
     if((maxIndex - tracker) >= 0){
           continues = userWantsToRepeat("Visa fler personer?");
@@ -255,4 +263,21 @@ void removeFrom(vector <Person> &personer){
           cout << "Person med signatur " << personer[index].signature << " har tagits bort." << endl;
     }
   } while(userWantsToRepeat("Vill du ta bort en annan person?") != 'N');
+}
+
+
+void sortBy(SortType type, vector <Person> & personer){
+  switch(type) {
+    case signature:
+      sort(personer.begin(), personer.end(), signatureSort);
+      printHeadlines();
+      for(auto p: personer){
+        printPersonData(p, 0);
+      }
+      break;
+    case name:
+      break;
+    case length:
+      break;
+  }
 }

@@ -21,6 +21,7 @@ int main() {
     "Skriv ut listan med personer",
     "Sök efter en person",
     "Ta bort en person",
+    "Sortera efter signatur",
     "Avsluta"
   };
 
@@ -54,10 +55,12 @@ int main() {
           break;
         case 4: removeFrom(personer);
           break;
-        case 5:
+        case 5: sortBy(signature, personer);
+          break;
+        case 6:
           break;
       }
-  } while(choice!=5);
+  } while(choice!=6);
 
 
   return 0;

@@ -6,6 +6,7 @@
 
   using namespace std;
   #include <string>
+  #include <algorithm>
 
   struct Person {
     string firstName;
@@ -14,6 +15,14 @@
     float length;
   };
 
+  
+
   const int maxPersonsShownInList = 2;
+
+  enum SortType {
+    name,
+    signature,
+    length
+  };
 
 #endif
