@@ -18,7 +18,7 @@
   /**
       Funktion som frågar om användaren vill fortsätta med funktionen
 
-      @param question: kontextberoende fråga som ska 
+      @param question: kontextberoende fråga som ska
       skrivas ut, t.ex. "Vill du sortera igen?"
 
       @returns char, antingen "J" eller "N"
