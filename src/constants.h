@@ -14,6 +14,6 @@
     float length;
   };
 
-  const int maxPersonsShownInList = 5;
+  const int maxPersonsShownInList = 2;
 
 #endif

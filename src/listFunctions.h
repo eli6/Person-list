@@ -13,6 +13,9 @@
 
   using namespace std;
 
+
+  char userWantsToRepeat(string question);
+
   /**
       Konverterar en persons för- och efternamn till gemener
 
@@ -56,6 +59,10 @@
 
       @param personer: listan med personer
   */
+
+  int findIndexWithSignatureIn(vector <Person> personer);
+
+
   void searchIn(vector <Person> personer);
 
   /**

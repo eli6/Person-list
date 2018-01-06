@@ -5,6 +5,19 @@
 #include "listFunctions.h"
 #include "mainFunctions.h"
 
+char userWantsToRepeat(string question){
+  char again;
+  printLine();
+  cout << question << " (j/n)" << endl;
+  do {
+    cin >> again;
+    printLine();
+    cin.get();
+    again = toupper(again);
+  } while( !(again == 'J' || again == 'N'));
+  return again;
+}
+
 
 void convertToLower(Person &p){
   transform(p.firstName.begin(), p.firstName.end(), p.firstName.begin(), ::tolower);
@@ -65,6 +78,16 @@ void addSignature(Person &person, vector<Person> personer){
   }
 
 
+}
+
+void printHeadlines(){
+  cout << setw(15) << left << "Nr" << setw(18) << left << "Sign" << setw(20) << left << fixed << "Name" << setw(15) << right << "Length [m]" << endl;
+  printLine();
+}
+
+void printPersonData(Person p, int number){
+  cout << fixed << setprecision(2);
+  cout << setw(15) << left << to_string(number) + ". " << setw(18) << left << p.signature << setw(20) << left << fixed << p.firstName + " " + p.lastName << setw(15) << right << p.length << endl;
 }
 
 void addPersonTo(vector<Person> &personer){
@@ -142,7 +165,7 @@ void printOnScreen(vector<Person> personer){
   cout << endl;
 
 
-  int number = 1;
+  int number;
   char continues = 'N';
   int tracker = 0;
   int maxIndex = int(personer.size()-1);
@@ -155,13 +178,13 @@ void printOnScreen(vector<Person> personer){
   //----------------------------------------------------------------------------
   do{
 
-    cout << setw(15) << left << "Nr. " << setw(18) << left << "Sign" << setw(20) << left << fixed << "Name" << setw(15) << right << "Length [m]" << endl;
-
     //Prints as many persons (if they exist) at a time as specified in the constant "maxPersonsShownInList" in "constants.h"
+    printHeadlines();
     for(size_t i = 0; i < maxPersonsShownInList; i++){
       if(tracker <= maxIndex){
-        cout << fixed << setprecision(2);
-        cout << setw(15) << left << to_string(number) + ". " << setw(18) << left << personer[tracker].signature << setw(20) << left << fixed << personer[tracker].firstName + " " + personer[tracker].lastName << setw(15) << right << personer[tracker].length << endl;
+        number = tracker+1;
+        Person p = personer[tracker];
+        printPersonData(p, number);
         number++;
       } else {
         continues = 'N';
@@ -172,93 +195,63 @@ void printOnScreen(vector<Person> personer){
 
     // If there are persons left to display: asks if the user wants to display them
     if((maxIndex - tracker) >= 0){
-      printLine();
-      cout << "Visa fler personer (j/n)?" << endl;
-      do {
-          cin >> continues;
-          printLine();
-          cin.get();
-          continues = toupper(continues);
-        } while( !(continues == 'J' || continues == 'N'));
+          continues = userWantsToRepeat("Visa fler personer?");
     }
 
   } while(continues != 'N');
 
 }
 
+int findIndexWithSignatureIn(vector <Person> personer){
+  string signature;
+
+  cout << "Ange signaturen för den person du vill söka efter" << endl;
+  cin >> signature;
+  printLine();
+  if(personer.size() > 0){
+    for(size_t i=0; i<personer.size(); i++){
+      if(personer[i].signature == signature){
+        return i;
+      }
+    }
+    cout << "Personen finns tyvärr inte i listan" << endl;
+    return -1;
+  } else {
+      cout << "Listan är tom. Personen hittades inte." << endl;
+      return -1;
+  }
+
+  return -1;
+}
+
 void searchIn(vector <Person> personer){
 
-  char again;
-
+  //----------------------------------------------------------------------------
+  // Finds the index of the person with a certain signature
+  // and prints the persons details on screen
+  //----------------------------------------------------------------------------
   do {
-    string signature;
-
-
-    cout << "Ange signaturen för den person du vill söka efter" << endl;
-    cin >> signature;
-
-    //If the vector isn't empty, check if the signature is there
-    //then print the data for that person
-    if(personer.size() > 0){
-      for(auto p: personer){
-        if(p.signature == signature){
-          printLine();
-          cout << "Resultat: " << endl;
-          printLine();
-          cout << setw(18) << left << "Sign" << setw(20) << left << fixed << "Name" << setw(15) << right << "Length [m]" << endl;
-          cout << setw(18) << left << p.signature << setw(20) << left << fixed << p.firstName + " " + p.lastName << setw(15) << right << p.length << endl;
-        } else {
-          cout << "Personen finns tyvärr inte i listan" << endl;
-        }
-      }
-    } else {
-      cout << "Listan är tom. Personen hittades inte." << endl;
-    }
-    printLine();
-    cout << "Vill du söka igen (j/n)?" << endl;
-    do {
-      cin >> again;
+    int index;
+    index = findIndexWithSignatureIn(personer);
+    if(index>=0) {
+      Person p = personer[index];
+      cout << "Resultat: " << endl;
       printLine();
-      cin.get();
-      again = toupper(again);
-    } while( !(again == 'J' || again == 'N'));
-  } while(again != 'N');
+      printHeadlines();
+      printPersonData(p, index+1);
+    }
+  } while(userWantsToRepeat("Vill du söka igen?") != 'N');
 
 }
 
+
 void removeFrom(vector <Person> &personer){
-  char again;
-
   do {
-    string signature;
-
-
-    cout << "Ange signaturen för den person du vill ta bort" << endl;
-    cin >> signature;
-
-    //If the vector isn't empty, check if the signature is there
-    //then print the data for that person
-    if(personer.size() > 0){
-      for(size_t i=0; i<personer.size(); i++){
-        if(personer[i].signature == signature){
-          printLine();
-          personer.erase(personer.begin()+i);
-          cout << "Person med signatur " << personer[i].signature << " har tagits bort." << endl;
-
-        } else {
-          cout << "Personen finns tyvärr inte i listan och kunde inte tas bort." << endl;
-        }
-      }
-    } else {
-      cout << "Listan är tom. Personen kan inte tas bort" << endl;
+    int index;
+    index = findIndexWithSignatureIn(personer);
+    if(index>=0) {
+          personer.erase(personer.begin()+index);
+          cout << "Person med signatur " << personer[index].signature << " har tagits bort." << endl;
     }
-    printLine();
-    cout << "Vill du ta bort en annan person (j/n)?" << endl;
-    do {
-      cin >> again;
-      printLine();
-      cin.get();
-      again = toupper(again);
-    } while( !(again == 'J' || again == 'N'));
-  } while(again != 'N');
+  } while(userWantsToRepeat("Vill du ta bort en annan person?") != 'N');
 }
