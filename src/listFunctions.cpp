@@ -10,6 +10,27 @@ bool signatureSort(const Person &a, const Person &b){
   return a.signature < b.signature;
 }
 
+bool lengthSort(const Person &a, const Person &b){
+  return a.length > b.length;
+}
+
+bool nameSort(const Person &a, const Person &b){
+    string nameForSorting1 = a.lastName + a.firstName;
+    string nameForSorting2 = b.lastName + b.firstName;
+    cout << nameForSorting1 << endl;
+    cout << nameForSorting2 << endl;
+    for(auto &c : nameForSorting1){
+      c = tolower(c);
+    }
+    for(auto &c : nameForSorting2){
+      c = tolower(c);
+    }
+  return nameForSorting1 < nameForSorting2;
+}
+
+
+
+
 char userWantsToRepeat(string question){
   char again;
   printLine();
@@ -266,18 +287,20 @@ void removeFrom(vector <Person> &personer){
 }
 
 
-void sortBy(SortType type, vector <Person> & personer){
+void sortBy(SortType type, vector <Person> personer){
   switch(type) {
     case signature:
       sort(personer.begin(), personer.end(), signatureSort);
-      printHeadlines();
-      for(auto p: personer){
-        printPersonData(p, 0);
-      }
       break;
     case name:
+      sort(personer.begin(), personer.end(), nameSort);
       break;
     case length:
+      sort(personer.begin(), personer.end(), lengthSort);
       break;
+  }
+  printHeadlines();
+  for(auto p: personer){
+    printPersonData(p, 0);
   }
 }

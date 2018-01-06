@@ -15,7 +15,14 @@
   using namespace std;
 
 
+  /**
+      Funktion som frågar om användaren vill fortsätta med funktionen
 
+      @param question: kontextberoende fråga som ska 
+      skrivas ut, t.ex. "Vill du sortera igen?"
+
+      @returns char, antingen "J" eller "N"
+  */
   char userWantsToRepeat(string question);
 
   /**
@@ -57,14 +64,20 @@
   void printOnScreen(vector<Person> personer);
 
   /**
-      Söker efter en person med en signatur som användaren anger
+      Söker efter en person med en signatur som användaren anger.
 
-      @param personer: listan med personer
+      @param personer: listan med persone
+      @returns int för personens index i vektorn. Hittas ingen person
+      returneras värdet -1
   */
-
   int findIndexWithSignatureIn(vector <Person> personer);
 
+  /**
+      Söker efter den person i listan vars signatur användaren anger
+      och skriver ut resultatet
 
+      @param personer: kopia av listan med personen
+  */
   void searchIn(vector <Person> personer);
 
   /**
@@ -74,6 +87,12 @@
   */
   void removeFrom(vector <Person> &personer);
 
-  void sortBy(SortType type, vector <Person> & personer);
+  /**
+      Sorterar listan på olika vis
+
+      @param personer: kopia av listan med personer
+      @param type: typ av sortering som ska göras
+  */
+  void sortBy(SortType type, vector <Person> personer);
 
 #endif

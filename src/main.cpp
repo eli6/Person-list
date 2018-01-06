@@ -21,7 +21,9 @@ int main() {
     "Skriv ut listan med personer",
     "Sök efter en person",
     "Ta bort en person",
+    "Sortera efter namn",
     "Sortera efter signatur",
+    "Sortera efter största längd",
     "Avsluta"
   };
 
@@ -55,12 +57,16 @@ int main() {
           break;
         case 4: removeFrom(personer);
           break;
-        case 5: sortBy(signature, personer);
+        case 5: sortBy(name, personer);
           break;
-        case 6:
+        case 6: sortBy(signature, personer);
+          break;
+        case 7: sortBy(length, personer);
+          break;
+        case 8:
           break;
       }
-  } while(choice!=6);
+  } while(choice!=8);
 
 
   return 0;
