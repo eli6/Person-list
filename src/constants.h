@@ -24,5 +24,6 @@
   };
 
   const char DELIM = ',';
+  const int MAX_MENU_NUMBER = 11;
 
 #endif

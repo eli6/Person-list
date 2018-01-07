@@ -72,10 +72,10 @@ int main() {
           break;
         case 10: readFromFile(personer);
           break;
-        case 11:
+        case MAX_MENU_NUMBER:
           break;
       }
-  } while(choice!=11);
+  } while(choice!=MAX_MENU_NUMBER);
 
 
   return 0;

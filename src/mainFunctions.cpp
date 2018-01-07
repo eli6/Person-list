@@ -3,14 +3,32 @@
 // v1.0
 
 #include "mainFunctions.h"
+#include "constants.h"
 
 void printLine(){
   cout << "------------------------------------------------------------------------" << endl;
 }
 
+void checkIfNumber(int &variable){
+  bool correctInput = false;
+  do {
+    cin >> variable;
+    cin.get();
+
+    if(!cin) {
+      cin.clear();
+      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      cout << "Ange ett tal" << endl;
+      correctInput = false;
+    } else {
+      correctInput = true;
+    }
+  } while(correctInput != true);
+}
+
 int printMenu(vector<string> menuChoices){
 
-  int choice;
+  int choice = 0;
 
   cout << endl;
   printLine();
@@ -25,8 +43,12 @@ int printMenu(vector<string> menuChoices){
   }
   printLine();
 
-  cin >> choice;
-  cin.get();
+  do {
+    checkIfNumber(choice);
+    if(choice > MAX_MENU_NUMBER){
+      cout << "Ange ett tal mellan 1 och " << MAX_MENU_NUMBER << endl;
+    }
+  } while(choice > MAX_MENU_NUMBER);
 
   return choice;
 }

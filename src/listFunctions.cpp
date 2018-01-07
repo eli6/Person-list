@@ -309,13 +309,83 @@ void randomize(vector <Person> personer){
   printOnScreen(personer);
 }
 
+string removeSubstring(string &databaseString, const char delimiter){
+  string temporary;
+  temporary = databaseString.substr(0, databaseString.find(delimiter));
+  databaseString.erase(0, databaseString.find(delimiter)+1);
+  return temporary;
+}
+
+unsigned char rot(unsigned char &character, int steps) {
+
+	unsigned char newCharacter;
+	int diff;
+	unsigned int ascii;
+	ascii = int(character);
+	//For converted numbers exceeding 255 -> resume from 32.
+	if (ascii + steps > 255) {
+		diff = 255 - ascii;
+		ascii = 32 - diff;
+	}
+
+	//For converted numbers below 32 -> add 224 to continue "backwards" instead.
+	if (ascii + steps < 32) {
+		ascii += 224;
+	}
+
+	ascii += steps;
+	newCharacter = char(ascii);
+	return newCharacter;
+}
+
+string encryptPerson(Person p, int steps){
+  string personInfo = p.firstName + DELIM + p.lastName + DELIM + p.signature + DELIM + to_string(p.length);
+  string encryptedString;
+  unsigned char unsignedCharacter;
+  for(auto c: personInfo){
+    unsignedCharacter = static_cast<unsigned char>(c);
+    encryptedString += rot(unsignedCharacter, steps);
+  }
+  return encryptedString;
+}
+
+Person decryptPerson(string encryptedString, int steps){
+  cout << encryptedString << endl;
+  string personInfo;
+  unsigned char unsignedCharacter;
+  for(auto c: encryptedString){
+    unsignedCharacter = static_cast<unsigned char>(c);
+    personInfo += rot(unsignedCharacter, steps*-1);
+  }
+
+  Person nyPerson;
+  nyPerson.firstName = removeSubstring(personInfo, DELIM);
+  nyPerson.lastName = removeSubstring(personInfo, DELIM);
+  nyPerson.signature = removeSubstring(personInfo, DELIM);
+  try {
+    nyPerson.length = stoi(removeSubstring(personInfo, DELIM));
+  } catch (exception const &e) {
+    cout << "Fel när längden lästes in: " << e.what() << endl;
+  }
+
+
+
+  return nyPerson;
+}
+
 void saveToFile(vector <Person> personer){
   cout << "Skriv vad filen ska heta (t.ex. \"minfil.txt\")" << endl;
   string fileName;
   cin >> fileName;
+  cout << "Ange krypteringsnyckel" << endl;
+  int encryptionKey;
+  cin >> encryptionKey;
+  string encryptedString;
   ofstream outFile(fileName.c_str());
   for(auto p: personer){
-    outFile << p.firstName << DELIM << p.lastName << DELIM << p.signature << DELIM << p.length << endl;
+    encryptedString = encryptPerson(p, encryptionKey);
+    //outFile << p.firstName << DELIM << p.lastName << DELIM << p.signature << DELIM << p.length << endl;
+    outFile << encryptedString << endl;
   }
   outFile.close();
 }
@@ -324,16 +394,18 @@ void readFromFile(vector <Person> &personer){
   cout << "Skriv filens namn (t.ex. \"minfil.txt\")" << endl;
   string fileName;
   cin >> fileName;
+  cout << "Ange ursprunglig krypteringsnyckel (positivt tal)" << endl;
+  int encryptionKey;
+  cin >> encryptionKey;
   ifstream inFile(fileName);
   personer.clear();
+  string encryptedString;
+  string decryptedString;
   Person nyPerson;
-  while(getline(inFile, nyPerson.firstName, DELIM)){
-    getline(inFile, nyPerson.lastName, DELIM);
-    getline(inFile, nyPerson.signature, DELIM);
-    inFile >> nyPerson.length;
-    inFile.get();
+  while(getline(inFile, encryptedString)){
+    nyPerson = decryptPerson(encryptedString, encryptionKey);
     personer.push_back(nyPerson);
-    cout << "pushed" << endl;
   }
+
   inFile.close();
 }
