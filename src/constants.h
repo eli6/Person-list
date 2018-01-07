@@ -15,8 +15,6 @@
     float length;
   };
 
-  
-
   const int maxPersonsShownInList = 2;
 
   enum SortType {
@@ -24,5 +22,7 @@
     signature,
     length
   };
+
+  const char DELIM = ',';
 
 #endif

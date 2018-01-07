@@ -25,6 +25,8 @@ int main() {
     "Sortera efter signatur",
     "Sortera efter största längd",
     "Slumpa listan",
+    "Spara listan till en fil",
+    "Läs in en lista från en fil",
     "Avsluta"
   };
 
@@ -66,10 +68,14 @@ int main() {
           break;
         case 8: randomize(personer);
           break;
-        case 9:
+        case 9: saveToFile(personer);
+          break;
+        case 10: readFromFile(personer);
+          break;
+        case 11:
           break;
       }
-  } while(choice!=9);
+  } while(choice!=11);
 
 
   return 0;

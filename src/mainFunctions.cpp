@@ -26,6 +26,7 @@ int printMenu(vector<string> menuChoices){
   printLine();
 
   cin >> choice;
+  cin.get();
 
   return choice;
 }

@@ -10,6 +10,7 @@
   #include <string>
   #include <iomanip>
   #include <algorithm>
+  #include <fstream>
   #include "constants.h"
 
   using namespace std;
@@ -101,5 +102,19 @@
       @param personer: kopia av listan med personer
   */
   void randomize(vector <Person> personer);
+
+  /**
+      Sparar listan till en fil, användaren anger filnamn
+
+      @param personer: kopia av listan med personer
+  */
+  void saveToFile(vector <Person> personer);
+
+  /**
+      Läser in en ny lista till en fil, användaren anger filnamn
+
+      @param personer: referens till listan med personer
+  */
+  void readFromFile(vector <Person> &personer);
 
 #endif

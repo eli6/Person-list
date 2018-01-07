@@ -2,4 +2,9 @@ build/*
 
 bin/*
 
+/attgöra
+/list.txt
+/minfil.txt
+/nyfil.txt
+
 .DS_Store

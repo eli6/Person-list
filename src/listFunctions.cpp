@@ -131,13 +131,14 @@ void addPersonTo(vector<Person> &personer){
     //----------------------------------------------------------------------------
     // User enters newPerson data
     //----------------------------------------------------------------------------
-    cin.get();
+
     cout << "Ange personens förnamn: " << endl;
     getline(cin, newPerson.firstName);
     cout << "Ange efternamn: " << endl;
     getline(cin, newPerson.lastName);
     cout << "Ange personens längd: " << endl;
     cin >> newPerson.length;
+    cin.get();
 
 
     //----------------------------------------------------------------------------
@@ -159,6 +160,7 @@ void addPersonTo(vector<Person> &personer){
       cout << "2. Avbryt" << endl;
       do {
           cin >> choice;
+          cin.get();
           printLine();
           //necessary?
           //cin.get();
@@ -305,4 +307,33 @@ void sortBy(SortType type, vector <Person> personer){
 void randomize(vector <Person> personer){
   random_shuffle(personer.begin(), personer.end());
   printOnScreen(personer);
+}
+
+void saveToFile(vector <Person> personer){
+  cout << "Skriv vad filen ska heta (t.ex. \"minfil.txt\")" << endl;
+  string fileName;
+  cin >> fileName;
+  ofstream outFile(fileName.c_str());
+  for(auto p: personer){
+    outFile << p.firstName << DELIM << p.lastName << DELIM << p.signature << DELIM << p.length << endl;
+  }
+  outFile.close();
+}
+
+void readFromFile(vector <Person> &personer){
+  cout << "Skriv filens namn (t.ex. \"minfil.txt\")" << endl;
+  string fileName;
+  cin >> fileName;
+  ifstream inFile(fileName);
+  personer.clear();
+  Person nyPerson;
+  while(getline(inFile, nyPerson.firstName, DELIM)){
+    getline(inFile, nyPerson.lastName, DELIM);
+    getline(inFile, nyPerson.signature, DELIM);
+    inFile >> nyPerson.length;
+    inFile.get();
+    personer.push_back(nyPerson);
+    cout << "pushed" << endl;
+  }
+  inFile.close();
 }
