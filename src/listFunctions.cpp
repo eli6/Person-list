@@ -7,16 +7,16 @@
 #include "constants.h"
 
 bool signatureSort(const Person &a, const Person &b){
-  return a.signature < b.signature;
+  return a.getSignature() < b.getSignature();
 }
 
 bool lengthSort(const Person &a, const Person &b){
-  return a.length > b.length;
+  return a.getLength() > b.getLength();
 }
 
 bool nameSort(const Person &a, const Person &b){
-    string nameForSorting1 = a.lastName + a.firstName;
-    string nameForSorting2 = b.lastName + b.firstName;
+    string nameForSorting1 = a.getLastName() + a.getFirstName();
+    string nameForSorting2 = b.getLastName() + b.getFirstName();
     cout << nameForSorting1 << endl;
     cout << nameForSorting2 << endl;
     for(auto &c : nameForSorting1){
@@ -46,65 +46,23 @@ char userWantsToRepeat(string question){
 
 
 void convertToLower(Person &p){
-  transform(p.firstName.begin(), p.firstName.end(), p.firstName.begin(), ::tolower);
-  transform(p.lastName.begin(), p.lastName.end(), p.lastName.begin(), ::tolower);
+  transform(p.getFirstName().begin(), p.getFirstName().end(), p.getFirstName().begin(), ::tolower);
+  transform(p.getLastName().begin(), p.getLastName().end(), p.getLastName().begin(), ::tolower);
 }
 
 bool areIdentical(Person p1, Person p2){
   convertToLower(p1);
   convertToLower(p2);
-  if(p1.firstName == p2.firstName &&
-      p1.lastName == p2.lastName &&
-      p1.length == p2.length){
+  if(p1.getFirstName() == p2.getFirstName() &&
+      p1.getLastName() == p2.getLastName() &&
+      p1.getLength() == p2.getLength()){
         return true;
   } else {
     return false;
   }
 }
 
-void addSignature(Person &person, vector<Person> personer){
-  //----------------------------------------------------------------------------
-  // Adds unique signature xxxyyyzz for a Person
-  //----------------------------------------------------------------------------
 
-  //First name part (xxx)
-  for(int i = 0; i < 3; i++){
-      if ( i > (person.firstName.size()-1)) {
-        person.signature += 'x';
-      } else {
-        person.signature += person.firstName[i];
-      }
-  }
-
-  //Last name part (yyy)
-  for(int i = 0; i < 3; i++){
-      if ( i > (person.lastName.size()-1)) {
-        person.signature += 'x';
-      } else {
-        person.signature += person.lastName[i];
-      }
-  }
-
-  //Checks if the signature is unique, if not, the serial number is augmented
-  int serialNumber = 1;
-
-  for(auto i: personer){
-    i.signature.pop_back();
-    i.signature.pop_back();
-    if(i.signature == person.signature){
-      serialNumber += 1;
-    }
-  }
-
-  //Add serial number (zz) to signature (with a preceding 0 if it's below 10)
-  if (serialNumber > 9){
-    person.signature += to_string(serialNumber);
-  } else {
-    person.signature += to_string(0) + to_string(serialNumber);
-  }
-
-
-}
 
 void printHeadlines(){
   cout << setw(15) << left << "Nr" << setw(18) << left << "Sign" << setw(20) << left << fixed << "Name" << setw(15) << right << "Length [m]" << endl;
@@ -118,7 +76,7 @@ void printPersonData(Person p, int number){
   } else {
     cout << setw(15) << left << "--";
   }
-  cout << setw(18) << left << p.signature << setw(20) << left << fixed << p.firstName + " " + p.lastName << setw(15) << right << p.length << endl;
+  cout << setw(18) << left << p.getSignature() << setw(20) << left << fixed << p.getFirstName() + " " + p.getLastName() << setw(15) << right << p.getLength() << endl;
 }
 
 void addPersonTo(vector<Person> &personer){
@@ -131,15 +89,20 @@ void addPersonTo(vector<Person> &personer){
     //----------------------------------------------------------------------------
     // User enters newPerson data
     //----------------------------------------------------------------------------
+    string firstName;
+    string lastName;
+    float length;
 
     cout << "Ange personens förnamn: " << endl;
-    getline(cin, newPerson.firstName);
+    getline(cin, firstName);
+    newPerson.setFirstName(firstName);
     cout << "Ange efternamn: " << endl;
-    getline(cin, newPerson.lastName);
+    getline(cin, lastName);
+    newPerson.setLastName(lastName);
     cout << "Ange personens längd: " << endl;
-    cin >> newPerson.length;
+    cin >> length;
     cin.get();
-
+    newPerson.setLength(length);
 
     //----------------------------------------------------------------------------
     // Checks if the new person is unique.
@@ -173,14 +136,14 @@ void addPersonTo(vector<Person> &personer){
       }
     } else {
       //Add the new person to the vector of persons
-      addSignature(newPerson, personer);
+      newPerson.addSignature(personer);
       personer.push_back(newPerson);
       finished = true;
     }
 
     } else {
       //Add the new person to the vector of persons
-      addSignature(newPerson, personer);
+      newPerson.addSignature(personer);
       personer.push_back(newPerson);
       finished = true;
     }
@@ -242,7 +205,7 @@ int findIndexWithSignatureIn(vector <Person> personer){
   printLine();
   if(personer.size() > 0){
     for(size_t i=0; i<personer.size(); i++){
-      if(personer[i].signature == signature){
+      if(personer[i].getSignature() == signature){
         return i;
       }
     }
@@ -283,7 +246,7 @@ void removeFrom(vector <Person> &personer){
     index = findIndexWithSignatureIn(personer);
     if(index>=0) {
           personer.erase(personer.begin()+index);
-          cout << "Person med signatur " << personer[index].signature << " har tagits bort." << endl;
+          cout << "Person med signatur " << personer[index].getSignature() << " har tagits bort." << endl;
     }
   } while(userWantsToRepeat("Vill du ta bort en annan person?") != 'N');
 }
@@ -339,7 +302,7 @@ unsigned char rot(unsigned char &character, int steps) {
 }
 
 string encryptPerson(Person p, int steps){
-  string personInfo = p.firstName + DELIM + p.lastName + DELIM + p.signature + DELIM + to_string(p.length);
+  string personInfo = p.getFirstName() + DELIM + p.getLastName() + DELIM + p.getSignature() + DELIM + to_string(p.getLength());
   string encryptedString;
   unsigned char unsignedCharacter;
   for(auto c: personInfo){
@@ -359,11 +322,11 @@ Person decryptPerson(string encryptedString, int steps){
   }
 
   Person nyPerson;
-  nyPerson.firstName = removeSubstring(personInfo, DELIM);
-  nyPerson.lastName = removeSubstring(personInfo, DELIM);
-  nyPerson.signature = removeSubstring(personInfo, DELIM);
+  nyPerson.setFirstName(removeSubstring(personInfo, DELIM));
+  nyPerson.setLastName(removeSubstring(personInfo, DELIM));
+  nyPerson.setSignature(removeSubstring(personInfo, DELIM));
   try {
-    nyPerson.length = stoi(removeSubstring(personInfo, DELIM));
+    nyPerson.setLength(stoi(removeSubstring(personInfo, DELIM)));
   } catch (exception const &e) {
     cout << "Fel när längden lästes in: " << e.what() << endl;
   }
