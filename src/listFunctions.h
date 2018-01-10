@@ -71,7 +71,7 @@
       @returns int för personens index i vektorn. Hittas ingen person
       returneras värdet -1
   */
-  int findIndexWithSignatureIn(vector <Person> personer);
+  size_t findIndexWithSignatureIn(vector <Person> personer);
 
   /**
       Söker efter den person i listan vars signatur användaren anger

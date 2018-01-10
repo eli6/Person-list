@@ -7,6 +7,7 @@
   using namespace std;
   #include <string>
   #include <algorithm>
+  #include <ctype.h>
 
   struct Person {
     private:
@@ -17,13 +18,22 @@
     public:
       void setFirstName(string s) { firstName = s; }
       void setLastName(string s) { lastName = s; }
-      void setSignature(string s) { signature = s; }
       void setLength(float l) { length = l; }
+      void setSignature(string s) { signature = s; }
 
       string getFirstName() const { return firstName; }
       string getLastName() const { return lastName; }
       string getSignature() const { return signature;}
       float getLength() const { return length; }
+
+      void lowercase() {
+        for(auto &c: firstName){
+          c = tolower(c);
+        }
+        for(auto &c: lastName){
+          c = tolower(c);
+        }
+      }
 
       void addSignature(vector<Person> personer){
         //----------------------------------------------------------------------------
@@ -59,6 +69,10 @@
           }
         }
 
+        for(auto &c: signature){
+          c = tolower(c);
+        }
+
         //Add serial number (zz) to signature (with a preceding 0 if it's below 10)
         if (serialNumber > 9){
           signature += to_string(serialNumber);
@@ -66,7 +80,7 @@
           signature += to_string(0) + to_string(serialNumber);
         }
 
-        this->setSignature(signature);
+        this->signature = signature;
 
       }
   };

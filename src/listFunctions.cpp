@@ -6,6 +6,8 @@
 #include "mainFunctions.h"
 #include "constants.h"
 
+
+
 bool signatureSort(const Person &a, const Person &b){
   return a.getSignature() < b.getSignature();
 }
@@ -45,14 +47,9 @@ char userWantsToRepeat(string question){
 }
 
 
-void convertToLower(Person &p){
-  transform(p.getFirstName().begin(), p.getFirstName().end(), p.getFirstName().begin(), ::tolower);
-  transform(p.getLastName().begin(), p.getLastName().end(), p.getLastName().begin(), ::tolower);
-}
-
 bool areIdentical(Person p1, Person p2){
-  convertToLower(p1);
-  convertToLower(p2);
+  p1.lowercase();
+  p2.lowercase();
   if(p1.getFirstName() == p2.getFirstName() &&
       p1.getLastName() == p2.getLastName() &&
       p1.getLength() == p2.getLength()){
@@ -107,6 +104,7 @@ void addPersonTo(vector<Person> &personer){
     //----------------------------------------------------------------------------
     // Checks if the new person is unique.
     //----------------------------------------------------------------------------
+
     bool notUnique = false;
     if(personer.size() > 0){
       for(auto p: personer){
@@ -197,13 +195,29 @@ void printOnScreen(vector<Person> personer){
 
 }
 
-int findIndexWithSignatureIn(vector <Person> personer){
+size_t findIndexWithSignatureIn(vector <Person> personer){
   string signature;
 
   cout << "Ange signaturen för den person du vill söka efter" << endl;
   cin >> signature;
   printLine();
-  if(personer.size() > 0){
+  auto it =
+  find_if(personer.begin(), personer.end(), [&signature](Person &p) {
+
+    return p.getSignature() == signature;
+
+  });
+
+  if(it != personer.end()){
+    size_t index = distance(personer.begin(), it);
+    cout << "Person hittad på index" << index << endl;
+    return index;
+  }
+
+  cout << "Personen hittades inte" << endl;
+  return -1;
+
+  /*if(personer.size() > 0){
     for(size_t i=0; i<personer.size(); i++){
       if(personer[i].getSignature() == signature){
         return i;
@@ -216,7 +230,7 @@ int findIndexWithSignatureIn(vector <Person> personer){
       return -1;
   }
 
-  return -1;
+  return -1;**/
 }
 
 void searchIn(vector <Person> personer){
