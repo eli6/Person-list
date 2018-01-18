@@ -15,57 +15,57 @@ using namespace std;
 //----------------------------------------------------------------------------
 int main() {
 
-  vector<Person> personer;
-  vector<string> menuChoices = {
-    "Lägg till en person",
-    "Skriv ut listan med personer",
-    "Sök efter en person",
-    "Ta bort en person",
-    "Sortera efter namn",
-    "Sortera efter signatur",
-    "Sortera efter största längd",
-    "Slumpa listan",
-    "Spara listan till en fil",
-    "Läs in en lista från en fil",
-    "Avsluta"
-  };
+    vector<Person> personer;
+    vector<string> menuChoices = {
+        "Lägg till en person",
+        "Skriv ut listan med personer",
+        "Sök efter en person",
+        "Ta bort en person",
+        "Sortera efter namn",
+        "Sortera efter signatur",
+        "Sortera efter största längd",
+        "Slumpa listan",
+        "Spara listan till en fil",
+        "Läs in en lista från en fil",
+        "Avsluta"
+    };
 
 
 
-  cout << endl;
-  cout << "*************************************************"<< endl;
-  cout << setw(18) << "" << "PERSONLISTA" << endl;
-  cout << "*************************************************" << endl;
-  cout << endl;
+    cout << endl;
+    cout << "*************************************************"<< endl;
+    cout << setw(18) << "" << "PERSONLISTA" << endl;
+    cout << "*************************************************" << endl;
+    cout << endl;
 
 
   //----------------------------------------------------------------------------
   // Utskrift av meny
   //----------------------------------------------------------------------------
 
-  int choice;
-  do {
-      int numberOfMembers = personer.size();
-      cout << endl;
-      cout << "Antal personer i listan just nu: " << numberOfMembers << endl;
-      choice = printMenu(menuChoices);
+    int choice;
+    do {
+        int numberOfMembers = personer.size();
+        cout << endl;
+        cout << "Antal personer i listan just nu: " << numberOfMembers << endl;
+        choice = printMenu(menuChoices);
 
-      switch(choice)
-      {
+        switch(choice)
+        {
         case 1: addPersonTo(personer);
-          break;
+            break;
         case 2: printOnScreen(personer);
-          break;
+            break;
         case 3: searchIn(personer);
-          break;
+            break;
         case 4: removeFrom(personer);
-          break;
+            break;
         case 5: sortBy(name, personer);
-          break;
+            break;
         case 6: sortBy(signature, personer);
-          break;
+            break;
         case 7: sortBy(length, personer);
-          break;
+            break;
         case 8: randomize(personer);
           break;
         case 9: saveToFile(personer);
@@ -74,9 +74,9 @@ int main() {
           break;
         case MAX_MENU_NUMBER:
           break;
-      }
+        }
   } while(choice!=MAX_MENU_NUMBER);
 
 
-  return 0;
+    return 0;
 }

@@ -2,11 +2,14 @@ CC=g++
 CFLAGS=-c -Wall -std=c++11
 INC := -I include
 
-bin/programMenu: build/main.o build/mainFunctions.o build/listFunctions.o
-	$(CC) build/main.o build/mainFunctions.o build/listFunctions.o -o bin/ProgramMenu
+bin/programMenu: build/main.o build/mainFunctions.o build/listFunctions.o build/constants.o
+	$(CC) build/main.o build/mainFunctions.o build/listFunctions.o build/constants.o -o bin/ProgramMenu
 
 build/main.o: src/main.cpp src/constants.h
 	$(CC) $(CFLAGS) src/main.cpp -o build/main.o
+
+build/constants.o: src/constants.cpp
+	$(CC) $(CFLAGS) src/constants.cpp -o build/constants.o
 
 build/mainFunctions.o: src/mainFunctions.cpp src/mainFunctions.h src/constants.h
 	$(CC) $(CFLAGS) src/mainFunctions.cpp -o build/mainFunctions.o
