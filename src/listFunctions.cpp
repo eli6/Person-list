@@ -193,7 +193,7 @@ void printOnScreen(vector<Person> personer){
 
 }
 
-vector<Person>::const_iterator findIndexWithSignatureIn(vector <Person> personer){
+vector<Person>::const_iterator findIndexWithSignatureIn(vector <Person> &personer){
 
     string signature;
 
@@ -240,8 +240,9 @@ void removeFrom(vector <Person> &personer){
         vector<Person>::const_iterator it;
         it = findIndexWithSignatureIn(personer);
         if(it != personer.end()) {
+            string signature = it->getSignature();
             personer.erase(it);
-            cout << "Personen " << it->getSignature() << " har tagits bort." << endl;
+            cout << "Personen " << signature << " har tagits bort." << endl;
         }
     } while(userWantsToRepeat("Vill du ta bort en annan person?") != 'N');
 }
@@ -308,7 +309,6 @@ string encryptPerson(Person p, int steps){
 }
 
 Person decryptPerson(string encryptedString, int steps){
-    cout << encryptedString << endl;
     string personInfo;
     unsigned char unsignedCharacter;
     for(auto c: encryptedString){

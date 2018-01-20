@@ -71,7 +71,7 @@
       @returns int för personens index i vektorn. Hittas ingen person
       returneras värdet -1
     */
-    vector<Person>::const_iterator findIndexWithSignatureIn(vector <Person> personer);
+    vector<Person>::const_iterator findIndexWithSignatureIn(vector <Person> &personer);
 
     /**
       Söker efter den person i listan vars signatur användaren anger
