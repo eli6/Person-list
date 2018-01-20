@@ -8,8 +8,10 @@
 using namespace std;
 
 #include "constants.h"
-#include "mainFunctions.h"
-#include "listFunctions.h"
+#include "generalFunctions.h"
+#include "addSearchRemove.h"
+#include "sortingRandomizing.h"
+#include "fileIO.h"
 //----------------------------------------------------------------------------
 // Huvudprogram
 //----------------------------------------------------------------------------

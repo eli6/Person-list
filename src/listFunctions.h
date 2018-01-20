@@ -27,13 +27,6 @@
     char userWantsToRepeat(string question);
 
     /**
-      Konverterar en persons för- och efternamn till gemener
-
-      @param p: referens till en Person
-    */
-    void convertToLower(Person &p);
-
-    /**
       Kontrollerar om två personer är identiska
 
       @param p1: första personen
@@ -41,14 +34,18 @@
     */
     bool areIdentical(Person p1, Person p2);
 
-    /**
-      Skapar en unik signatur för en person i en vektor
 
-      @param person: personen som ska få en signatur
-      @param personer: vectorn med personer som signaturen måste vara unik i
-    */
-    void addSignature(Person &person, vector<Person> personer);
+    bool signatureSort(const Person &a, const Person &b);
 
+    bool lengthSort(const Person &a, const Person &b);
+
+    bool nameSort(const Person &a, const Person &b)
+
+    bool areIdentical(Person p1, Person p2)
+
+    void printHeadlines()
+
+    void printPersonData(Person p, int number)
 
     /**
       Lägger till en person i listan med personer
@@ -102,6 +99,20 @@
       @param personer: kopia av listan med personer
     */
     void randomize(vector <Person> personer);
+
+    string removeSubstring(string &databaseString, const char delimiter)
+
+    /**
+      Gör rotkryptering av char. Ange negativt värde för steps för dekryptering
+
+      @param character : tecknet som ska krypteras
+      @param steps : krypteringsnyckel (negativ vid dekryptering)
+    */
+    unsigned char rot(unsigned char &character, int steps);
+
+    string encryptPerson(Person p, int steps);
+
+    Person decryptPerson(string encryptedString, int steps);
 
     /**
       Sparar listan till en fil, användaren anger filnamn
