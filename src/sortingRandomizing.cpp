@@ -21,10 +21,10 @@ bool nameSort(const Person &a, const Person &b){
     cout << nameForSorting1 << endl;
     cout << nameForSorting2 << endl;
     for(auto &c : nameForSorting1){
-        c = tolower(c);
+        c = static_cast<char>(tolower(c));
     }
     for(auto &c : nameForSorting2){
-        c = tolower(c);
+        c = static_cast<char>(tolower(c));
     }
     return nameForSorting1 < nameForSorting2;
 }

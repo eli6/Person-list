@@ -13,7 +13,7 @@ char userWantsToRepeat(string question){
         cin >> again;
         printLine();
         cin.get();
-        again = toupper(again);
+        again = static_cast<char>(toupper(again));
     } while( !(again == 'J' || again == 'N'));
     return again;
 }
@@ -36,7 +36,7 @@ void checkIfNumber(int &variable){
         } else {
             correctInput = true;
         }
-    } while(correctInput != true);
+    } while(!correctInput);
 }
 
 int printMenu(vector<string> menuChoices){

@@ -4,7 +4,6 @@
 
 #include <iostream>
 #include <vector>
-#include <string>
 using namespace std;
 
 #include "constants.h"
@@ -47,7 +46,7 @@ int main() {
 
     int choice;
     do {
-        int numberOfMembers = personer.size();
+        int numberOfMembers = static_cast<int>(personer.size());
         cout << endl;
         cout << "Antal personer i listan just nu: " << numberOfMembers << endl;
         choice = printMenu(menuChoices);
@@ -69,13 +68,15 @@ int main() {
         case 7: sortBy(length, personer);
             break;
         case 8: randomize(personer);
-          break;
+            break;
         case 9: saveToFile(personer);
-          break;
+            break;
         case 10: readFromFile(personer);
-          break;
+            break;
         case MAX_MENU_NUMBER:
-          break;
+            break;
+        default:
+            break;
         }
   } while(choice!=MAX_MENU_NUMBER);
 

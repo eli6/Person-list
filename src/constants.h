@@ -8,7 +8,7 @@
     #include <string>
     #include <vector>
     #include <algorithm>
-    #include <ctype.h>
+    #include <cctype>
     using namespace std;
 
     struct Person {

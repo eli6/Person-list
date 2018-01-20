@@ -16,7 +16,7 @@ unsigned char rot(unsigned char &character, int steps) {
 	unsigned char newCharacter;
 	int diff;
 	unsigned int ascii;
-	ascii = int(character);
+	ascii = static_cast<unsigned int>(character);
 	//For converted numbers exceeding 255 -> resume from 32.
 	if (ascii + steps > 255) {
         diff = 255 - ascii;
@@ -81,7 +81,7 @@ void saveToFile(vector <Person> personer){
     string encryptedString;
     ofstream outFile(fileName.c_str());
     //Encrypt every person in the vector and print to file
-    for(auto p: personer){
+    for(const auto &p: personer){
         encryptedString = encryptPerson(p, encryptionKey);
         outFile << encryptedString << endl;
     }

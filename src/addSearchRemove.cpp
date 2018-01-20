@@ -7,13 +7,9 @@ bool areIdentical(Person p1, Person p2){
     p1.lowercase();
     p2.lowercase();
     //If persons are equal, return true
-    if(p1.getFirstName() == p2.getFirstName() &&
+    return p1.getFirstName() == p2.getFirstName() &&
         p1.getLastName() == p2.getLastName() &&
-        p1.getLength() == p2.getLength()){
-        return true;
-    } else {
-        return false;
-    }
+        p1.getLength() == p2.getLength();
 }
 
 void addPersonTo(vector<Person> &personer){
@@ -46,7 +42,7 @@ void addPersonTo(vector<Person> &personer){
         //----------------------------------------------------------------------------
         bool notUnique = false;
 
-        if(personer.size() > 0){
+        if(!personer.empty() > 0){
 
             for(auto p: personer){
                 if(areIdentical(p, newPerson)){
@@ -54,7 +50,7 @@ void addPersonTo(vector<Person> &personer){
                 }
             }
 
-            if(notUnique == true){
+            if(notUnique){
                 //The user chooses what to do in case the person isn't unique
                 int choice = 0;
                 cout << "Denna person finns redan. Välj ett alterantiv nedan:" << endl;
@@ -86,7 +82,7 @@ void addPersonTo(vector<Person> &personer){
             finished = true;
         }
 
-    } while(finished != true);
+    } while(!finished);
 
 }
 
@@ -120,7 +116,7 @@ void searchIn(vector <Person> personer){
   // and prints the persons details on screen
   //----------------------------------------------------------------------------
     do {
-        vector<Person>::const_iterator it = findIndexWithSignatureIn(personer);
+        auto it = findIndexWithSignatureIn(personer);
 
         //If we have an iterator to a found person, print that person's data
         if(it!=personer.end()) {
