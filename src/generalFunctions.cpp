@@ -32,7 +32,7 @@ void printLine(){
     cout << "------------------------------------------------------------------------" << endl;
 }
 
-void checkIfNumber(int &variable){
+void inputAndCheckIfInt(int &variable){
     bool correctInput = false;
     do {
         cin >> variable;
@@ -42,6 +42,23 @@ void checkIfNumber(int &variable){
             cin.clear();
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             cout << "Ange ett tal" << endl;
+            correctInput = false;
+        } else {
+            correctInput = true;
+        }
+    } while(!correctInput);
+}
+
+void inputAndCheckIfFloat(float &variable){
+    bool correctInput = false;
+    do {
+        cin >> variable;
+        cin.get();
+
+        if(!cin) {
+            cin.clear();
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            cout << "Ange ett heltal/decimaltal" << endl;
             correctInput = false;
         } else {
             correctInput = true;
@@ -67,7 +84,7 @@ int printMenu(vector<string> menuChoices){
     printLine();
 
     do {
-        checkIfNumber(choice);
+        inputAndCheckIfInt(choice);
         if(choice > MAX_MENU_NUMBER){
             cout << "Ange ett tal mellan 1 och " << MAX_MENU_NUMBER << endl;
         }
@@ -90,7 +107,7 @@ void printPersonData(Person p, int number){
         //If the number is below 1, don't add a number (for example in searches)
         cout << setw(15) << left << "--";
     }
-    cout << setw(18) << left << p.getSignature() << setw(20) << left << fixed << p.getFirstName() + " " + p.getLastName() << setw(15) << right << p.getLength() << endl;
+    cout << setw(18) << left << p.getSignature() << setw(20) << left << fixed << p.getFirstName() + " " + p.getLastName() << setw(15) << right << p.getHeight() << endl;
 }
 
 

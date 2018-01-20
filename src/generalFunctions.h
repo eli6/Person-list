@@ -26,6 +26,12 @@
 
     void printLine();
 
+    void inputAndCheckIfInt(int &variable);
+
+    void inputAndCheckIfFloat(float &variable);
+
+
+
     /**
     Funktion för utskrift av menyn
 

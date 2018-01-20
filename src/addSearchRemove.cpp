@@ -38,7 +38,7 @@ void addPersonTo(vector<Person> &personer){
             do {
                 try {
                     cout << "Ange personens längd [m]: " << endl;
-                    cin >> height;
+                    inputAndCheckIfFloat(height);
                     newPerson.setHeight(height);
                     success = true;
                 } catch (exception const &e) {
