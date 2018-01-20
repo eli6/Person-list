@@ -22,6 +22,7 @@
     */
     char userWantsToRepeat(string question);
 
+    void returnToMenu();
 
     void printLine();
 

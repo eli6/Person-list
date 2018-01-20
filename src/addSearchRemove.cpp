@@ -18,56 +18,64 @@ void addPersonTo(vector<Person> &personer){
     bool finished = false;
 
     do {
-        finished = false;
-        //----------------------------------------------------------------------------
-        // User enters newPerson data
-        //----------------------------------------------------------------------------
-        string firstName;
-        string lastName;
-        float length;
+        do {
+            finished = false;
+            //----------------------------------------------------------------------------
+            // User enters newPerson data
+            //----------------------------------------------------------------------------
+            string firstName;
+            string lastName;
+            float length;
 
-        cout << "Ange personens förnamn: " << endl;
-        getline(cin, firstName);
-        newPerson.setFirstName(firstName);
-        cout << "Ange efternamn: " << endl;
-        getline(cin, lastName);
-        newPerson.setLastName(lastName);
-        cout << "Ange personens längd: " << endl;
-        cin >> length;
-        cin.get();
-        newPerson.setLength(length);
+            cout << "Ange personens förnamn: " << endl;
+            getline(cin, firstName);
+            newPerson.setFirstName(firstName);
+            cout << "Ange efternamn: " << endl;
+            getline(cin, lastName);
+            newPerson.setLastName(lastName);
+            cout << "Ange personens längd: " << endl;
+            cin >> length;
+            cin.get();
+            newPerson.setLength(length);
 
-        //----------------------------------------------------------------------------
-        // Checks if the new person is unique.
-        //----------------------------------------------------------------------------
-        bool notUnique = false;
+            //----------------------------------------------------------------------------
+            // Checks if the new person is unique.
+            //----------------------------------------------------------------------------
+            bool notUnique = false;
 
-        if(!personer.empty() > 0){
+            if(!personer.empty() > 0){
 
-            for(auto p: personer){
-                if(areIdentical(p, newPerson)){
-                    notUnique = true;
+                for(auto p: personer){
+                    if(areIdentical(p, newPerson)){
+                        notUnique = true;
+                    }
                 }
-            }
 
-            if(notUnique){
-                //The user chooses what to do in case the person isn't unique
-                int choice = 0;
-                cout << "Denna person finns redan. Välj ett alterantiv nedan:" << endl;
-                cout << "1. Ändra inmatning" << endl;
-                cout << "2. Avbryt" << endl;
-                do {
-                    cin >> choice;
-                    cin.get();
-                    printLine();
-                } while(!(choice == 1 || choice == 2));
-                if(choice == 1){
-                    //Sets variable that lets us continue in this loop to add data
-                    finished = false;
-                } else if(choice == 2) {
-                    cout << "choice 2" << endl;
+                if(notUnique){
+                    //The user chooses what to do in case the person isn't unique
+                    int choice = 0;
+                    cout << "Denna person finns redan. Välj ett alterantiv nedan:" << endl;
+                    cout << "1. Ändra inmatning" << endl;
+                    cout << "2. Avbryt" << endl;
+                    do {
+                        cin >> choice;
+                        cin.get();
+                        printLine();
+                    } while(!(choice == 1 || choice == 2));
+                    if(choice == 1){
+                        //Sets variable that lets us continue in this loop to add data
+                        finished = false;
+                    } else if(choice == 2) {
+                        cout << "choice 2" << endl;
+                        finished = true;
+                    }
+                } else {
+                    //Add the new person to the vector of persons
+                    newPerson.addSignature(personer);
+                    personer.push_back(newPerson);
                     finished = true;
                 }
+
             } else {
                 //Add the new person to the vector of persons
                 newPerson.addSignature(personer);
@@ -75,15 +83,8 @@ void addPersonTo(vector<Person> &personer){
                 finished = true;
             }
 
-        } else {
-            //Add the new person to the vector of persons
-            newPerson.addSignature(personer);
-            personer.push_back(newPerson);
-            finished = true;
-        }
-
-    } while(!finished);
-
+        } while(!finished);
+    } while(userWantsToRepeat("Vill du lägga till en till person?") != 'N');
 }
 
 

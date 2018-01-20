@@ -86,6 +86,7 @@ void saveToFile(vector <Person> personer){
         outFile << encryptedString << endl;
     }
     outFile.close();
+    returnToMenu();
 }
 
 void readFromFile(vector <Person> &personer){
@@ -105,6 +106,6 @@ void readFromFile(vector <Person> &personer){
         nyPerson = decryptPerson(encryptedString, encryptionKey);
         personer.push_back(nyPerson);
     }
-
     inFile.close();
+    returnToMenu();
 }

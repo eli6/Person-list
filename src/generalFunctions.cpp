@@ -18,6 +18,16 @@ char userWantsToRepeat(string question){
     return again;
 }
 
+void returnToMenu(){
+    printLine();
+    cout << "Tryck på m för att återgå till menyn" << endl;
+    char ok;
+    do {
+        cin >> ok;
+    } while(ok != 'm');
+}
+
+
 void printLine(){
     cout << "------------------------------------------------------------------------" << endl;
 }
@@ -127,4 +137,5 @@ void printOnScreen(vector<Person> personer){
 
     } while(continues != 'N');
 
+    returnToMenu();
 }
