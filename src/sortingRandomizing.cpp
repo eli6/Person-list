@@ -11,15 +11,13 @@ bool signatureSort(const Person &a, const Person &b){
     return a.getSignature() < b.getSignature();
 }
 
-bool lengthSort(const Person &a, const Person &b){
-    return a.getLength() > b.getLength();
+bool heightSort(const Person &a, const Person &b){
+    return a.getHeight() > b.getHeight();
 }
 
 bool nameSort(const Person &a, const Person &b){
     string nameForSorting1 = a.getLastName() + a.getFirstName();
     string nameForSorting2 = b.getLastName() + b.getFirstName();
-    cout << nameForSorting1 << endl;
-    cout << nameForSorting2 << endl;
     for(auto &c : nameForSorting1){
         c = static_cast<char>(tolower(c));
     }
@@ -37,8 +35,8 @@ void sortBy(SortType type, vector <Person> personer){
         case name:
             sort(personer.begin(), personer.end(), nameSort);
             break;
-        case length:
-            sort(personer.begin(), personer.end(), lengthSort);
+        case height:
+            sort(personer.begin(), personer.end(), heightSort);
             break;
         }
         printOnScreen(personer);

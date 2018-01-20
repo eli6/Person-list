@@ -9,7 +9,7 @@ bool areIdentical(Person p1, Person p2){
     //If persons are equal, return true
     return p1.getFirstName() == p2.getFirstName() &&
         p1.getLastName() == p2.getLastName() &&
-        p1.getLength() == p2.getLength();
+        p1.getHeight() == p2.getHeight();
 }
 
 void addPersonTo(vector<Person> &personer){
@@ -25,7 +25,7 @@ void addPersonTo(vector<Person> &personer){
             //----------------------------------------------------------------------------
             string firstName;
             string lastName;
-            float length;
+            float height;
 
             cout << "Ange personens förnamn: " << endl;
             getline(cin, firstName);
@@ -33,10 +33,18 @@ void addPersonTo(vector<Person> &personer){
             cout << "Ange efternamn: " << endl;
             getline(cin, lastName);
             newPerson.setLastName(lastName);
-            cout << "Ange personens längd: " << endl;
-            cin >> length;
-            cin.get();
-            newPerson.setLength(length);
+
+            bool success = false;
+            do {
+                try {
+                    cout << "Ange personens längd [m]: " << endl;
+                    cin >> height;
+                    newPerson.setHeight(height);
+                    success = true;
+                } catch (exception const &e) {
+                    cout << "Ange längden igen";
+                }
+            } while(!success);
 
             //----------------------------------------------------------------------------
             // Checks if the new person is unique.
@@ -91,7 +99,7 @@ void addPersonTo(vector<Person> &personer){
 vector<Person>::const_iterator findIndexWithSignatureIn(vector <Person> &personer){
 
     string signature;
-
+    //hej
     cout << "Ange signaturen för den person du vill söka efter" << endl;
     cin >> signature;
     printLine();

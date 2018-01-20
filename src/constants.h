@@ -16,17 +16,23 @@
             string firstName;
             string lastName;
             string signature;
-            float length;
+            float height;
         public:
             void setFirstName(string s) { firstName = s; }
             void setLastName(string s) { lastName = s; }
-            void setLength(float l) { length = l; }
+            void setHeight(float h) {
+                if(h > 3){
+                       throw invalid_argument("Orimlig längd");
+               } else {
+                   height = h;
+               }
+            }
             void setSignature(string s) { signature = s; }
 
             string getFirstName() const { return firstName; }
             string getLastName() const { return lastName; }
             string getSignature() const { return signature;}
-            float getLength() const { return length; }
+            float getHeight() const { return height; }
 
             void lowercase();
             void addSignature(vector <Person> personer);
@@ -38,7 +44,7 @@
     enum SortType {
         name,
         signature,
-        length
+        height
     };
 
     const char DELIM = ',';

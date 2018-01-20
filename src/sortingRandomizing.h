@@ -12,7 +12,7 @@
 
     bool signatureSort(const Person &a, const Person &b);
 
-    bool lengthSort(const Person &a, const Person &b);
+    bool heightSort(const Person &a, const Person &b);
 
     bool nameSort(const Person &a, const Person &b);
 

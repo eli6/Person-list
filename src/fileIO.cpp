@@ -35,7 +35,7 @@ unsigned char rot(unsigned char &character, int steps) {
 
 string encryptPerson(Person p, int steps){
     //Create a string of person data separated by the delimiter
-    string personInfo = p.getFirstName() + DELIM + p.getLastName() + DELIM + p.getSignature() + DELIM + to_string(p.getLength());
+    string personInfo = p.getFirstName() + DELIM + p.getLastName() + DELIM + p.getSignature() + DELIM + to_string(p.getHeight());
     string encryptedString;
     unsigned char unsignedCharacter;
     //Encrypt every char in the person data string
@@ -60,13 +60,11 @@ Person decryptPerson(string encryptedString, int steps){
     nyPerson.setLastName(removeSubstring(personInfo, DELIM));
     nyPerson.setSignature(removeSubstring(personInfo, DELIM));
 
-    //Set length using conversion from string to float and catch exception if this fails
+    //Set height using conversion from string to float and catch exception if this fails
     try {
-        nyPerson.setLength(stof(removeSubstring(personInfo, DELIM)));
+       nyPerson.setHeight(stof(removeSubstring(personInfo, DELIM)));
     } catch (exception const &e) {
-        cout << "Fel när längden lästes in: " << e.what() << endl;
-        cout << "Längden sätts till 0" << endl;
-        nyPerson.setLength(0);
+       throw;
     }
     return nyPerson;
 }
@@ -90,6 +88,8 @@ void saveToFile(vector <Person> personer){
 }
 
 void readFromFile(vector <Person> &personer){
+    bool found = false;
+
     cout << "Skriv filens namn (t.ex. \"minfil.txt\")" << endl;
     string fileName;
     cin >> fileName;
@@ -97,15 +97,30 @@ void readFromFile(vector <Person> &personer){
     int encryptionKey;
     cin >> encryptionKey;
     ifstream inFile(fileName);
-    personer.clear();
-    string encryptedString;
-    string decryptedString;
-    Person nyPerson;
-    //Decrypt every line in the file and add as new person to vector personer
-    while(getline(inFile, encryptedString)){
-        nyPerson = decryptPerson(encryptedString, encryptionKey);
-        personer.push_back(nyPerson);
+    if(inFile){
+        found = true;
+        personer.clear();
+        string encryptedString;
+        string decryptedString;
+        Person nyPerson;
+        int line = 0;
+        //Decrypt every line in the file and add as new person to vector personer
+        try {
+            while (getline(inFile, encryptedString)) {
+                nyPerson = decryptPerson(encryptedString, encryptionKey);
+                personer.push_back(nyPerson);
+            }
+            inFile.close();
+            cout << "Filen lästes in." << endl;
+        } catch (exception const &e) {
+            cout << "Orimlig längd på person hittades i filen." << endl;
+            cout << "Inmatningen avbryts. Kontrollera att du angav rätt krypteringsnyckel" << endl;
+            cout << "Inmatade data raderas" << endl;
+            personer.clear();
+        }
+    } else {
+        cout << "Filen hittades ej" << endl;
     }
-    inFile.close();
+
     returnToMenu();
 }

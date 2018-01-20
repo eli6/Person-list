@@ -5,7 +5,7 @@ INC := -I include
 bin/programMenu: build/main.o build/generalFunctions.o build/addSearchRemove.o build/sortingRandomizing.o build/fileIO.o build/constants.o
 	$(CC) $(CFLAGS) build/main.o build/generalFunctions.o build/addSearchRemove.o build/sortingRandomizing.o build/fileIO.o build/constants.o -o bin/ProgramMenu
 
-build/main.o: src/main.cpp #src/constants.h
+build/main.o: src/main.cpp src/constants.h
 	$(CC) -c $(CFLAGS) src/main.cpp -o build/main.o
 
 build/constants.o: src/constants.cpp

@@ -65,7 +65,7 @@ int main() {
             break;
         case 6: sortBy(signature, personer);
             break;
-        case 7: sortBy(length, personer);
+        case 7: sortBy(height, personer);
             break;
         case 8: randomize(personer);
             break;
