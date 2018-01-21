@@ -5,6 +5,12 @@
     #include <fstream>
     using namespace std;
 
+    /**
+      Avlägsnar det första ordet i en sträng, fram till delimitern
+
+      @param &databaseString : strängen som substrängar ska skapas från
+      @param delimiter : delimitern som används som avgränsare
+    */
     string removeSubstring(string &databaseString, const char delimiter);
 
     /**
@@ -15,8 +21,20 @@
     */
     unsigned char rot(unsigned char &character, int steps);
 
+    /**
+      Skapar en krypterad sträng avdelad med "DELIM" för en persons data
+
+      @param p : personen som ska krypteras
+      @param steps : krypteringsnyckel
+    */
     string encryptPerson(Person p, int steps);
 
+    /**
+      Skapar en person utifrån en krypterad sträng avdelad med "DELIM"
+
+      @param encryptedString : den krypterade strängen
+      @param steps : ursprunglig krypteringsnyckel (positiv)
+    */
     Person decryptPerson(string encryptedString, int steps);
 
     /**

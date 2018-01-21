@@ -32,10 +32,15 @@ void Person::addSignature(vector<Person> personer){
         }
     }
 
+    for(auto &c: newSignature){
+        c = static_cast<char>(tolower(c));
+    }
+
     //Checks if the signature is unique, if not, the serial number is augmented
     int serialNumber = 1;
 
     for(auto i: personer){
+        //Remove the serial number from the person's signature for comparison
         i.signature.pop_back();
         i.signature.pop_back();
         if(i.signature == newSignature){
@@ -43,14 +48,13 @@ void Person::addSignature(vector<Person> personer){
         }
     }
 
-    for(auto &c: newSignature){
-        c = static_cast<char>(tolower(c));
-    }
+
 
     //Add serial number (zz) to signature (with a preceding 0 if it's below 10)
     if (serialNumber > 9){
         newSignature += to_string(serialNumber);
     } else {
+        //Add a 0 if the number is one-digit
         newSignature += to_string(0) + to_string(serialNumber);
     }
 

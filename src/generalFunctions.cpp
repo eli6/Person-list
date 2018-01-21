@@ -20,6 +20,7 @@ char userWantsToRepeat(string question){
 
 void returnToMenu(){
     printLine();
+    cout << endl;
     cout << "Tryck på m för att återgå till menyn" << endl;
     char ok;
     do {
@@ -32,12 +33,17 @@ void printLine(){
     cout << "------------------------------------------------------------------------" << endl;
 }
 
+void printStarLine(){
+    cout << "************************************************************************" << endl;
+}
+
 void inputAndCheckIfInt(int &variable){
     bool correctInput = false;
     do {
         cin >> variable;
         cin.get();
 
+        //Check if input is accepted by the variable
         if(!cin) {
             cin.clear();
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -55,6 +61,7 @@ void inputAndCheckIfFloat(float &variable){
         cin >> variable;
         cin.get();
 
+        //Check if input is accepted by the variable
         if(!cin) {
             cin.clear();
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -83,6 +90,7 @@ int printMenu(vector<string> menuChoices){
     }
     printLine();
 
+    //Check if input is an int and that it is one of the menu options
     do {
         inputAndCheckIfInt(choice);
         if(choice > MAX_MENU_NUMBER){
@@ -94,7 +102,7 @@ int printMenu(vector<string> menuChoices){
 }
 
 void printHeadlines(){
-    cout << setw(15) << left << "Nr" << setw(18) << left << "Sign" << setw(20) << left << fixed << "Name" << setw(15) << right << "Length [m]" << endl;
+    cout << setw(15) << left << "Nr" << setw(18) << left << "Sign" << setw(29) << left << fixed << "Name" << setw(10) << right << "Length [m]" << endl;
     printLine();
 }
 
@@ -107,7 +115,7 @@ void printPersonData(Person p, int number){
         //If the number is below 1, don't add a number (for example in searches)
         cout << setw(15) << left << "--";
     }
-    cout << setw(18) << left << p.getSignature() << setw(20) << left << fixed << p.getFirstName() + " " + p.getLastName() << setw(15) << right << p.getHeight() << endl;
+    cout << setw(18) << left << p.getSignature() << setw(29) << left << fixed << p.getFirstName() + " " + p.getLastName() << setw(10) << right << p.getHeight() << endl;
 }
 
 
@@ -115,9 +123,9 @@ void printPersonData(Person p, int number){
 void printOnScreen(vector<Person> personer){
 
     cout << endl;
-    cout << "*************************************************"<< endl;
-    cout << setw(10) << "" << "UTSKRIFT AV LISTAN" << endl;
-    cout << "*************************************************" << endl;
+    printStarLine();
+    cout << setw(25) << "" << "UTSKRIFT AV LISTAN" << endl;
+    printStarLine();
     cout << endl;
 
 

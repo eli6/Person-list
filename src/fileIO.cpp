@@ -84,6 +84,8 @@ void saveToFile(vector <Person> personer){
         outFile << encryptedString << endl;
     }
     outFile.close();
+    printLine();
+    cout << "Datan sparades till fil." << endl;
     returnToMenu();
 }
 

@@ -34,9 +34,9 @@ int main() {
 
 
     cout << endl;
-    cout << "*************************************************"<< endl;
-    cout << setw(18) << "" << "PERSONLISTA" << endl;
-    cout << "*************************************************" << endl;
+    printStarLine();
+    cout << setw(30) << "" << "PERSONLISTA" << endl;
+    printStarLine();
     cout << endl;
 
 

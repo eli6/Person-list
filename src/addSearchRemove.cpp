@@ -100,7 +100,7 @@ vector<Person>::const_iterator findIndexWithSignatureIn(vector <Person> &persone
 
     string signature;
     //hej
-    cout << "Ange signaturen för den person du vill söka efter" << endl;
+    cout << "Ange signaturen för personen: " << endl;
     cin >> signature;
     printLine();
 
@@ -147,6 +147,7 @@ void removeFrom(vector <Person> &personer){
         show a message */
         if(it != personer.end()) {
             string signature = it->getSignature();
+            cout << signature << endl;
             personer.erase(it);
             cout << "Personen " << signature << " har tagits bort." << endl;
         }

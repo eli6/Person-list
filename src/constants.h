@@ -5,6 +5,7 @@
 #define constants
 
 
+    #include <iostream>
     #include <string>
     #include <vector>
     #include <algorithm>
@@ -39,7 +40,8 @@
 
     };
 
-    const int MAX_PERSONS_IN_LIST = 2;
+    //Antal personer som visas samtidigt i listan
+    const int MAX_PERSONS_IN_LIST = 20;
 
     enum SortType {
         name,
@@ -48,6 +50,9 @@
     };
 
     const char DELIM = ',';
+
+    /*Sista numret i menyn som används för "Avsluta." Det återanvänds flera
+    gånger, därav konstanten */
     const int MAX_MENU_NUMBER = 11;
 
 #endif
