@@ -25,7 +25,9 @@ void returnToMenu(){
     char ok;
     do {
         cin >> ok;
-    } while(ok != 'm');
+        cin.get();
+        ok = static_cast<char>(toupper(ok));
+    } while(ok != 'M');
     printLine();
 }
 
