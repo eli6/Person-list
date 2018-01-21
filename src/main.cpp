@@ -47,8 +47,7 @@ int main() {
     int choice;
     do {
         int numberOfMembers = static_cast<int>(personer.size());
-        cout << endl;
-        cout << "Antal personer i listan just nu: " << numberOfMembers << endl;
+        cout << "ANTAL PERSONER I LISTAN: " << numberOfMembers << endl;
         choice = printMenu(menuChoices);
 
         switch(choice)

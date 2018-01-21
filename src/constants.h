@@ -22,6 +22,7 @@
             void setFirstName(string s) { firstName = s; }
             void setLastName(string s) { lastName = s; }
             void setHeight(float h) {
+                //Kontrollera att längden är rimlig (inte över 3 m). Undantag isåfall
                 if(h > 3){
                        throw invalid_argument("Orimlig längd");
                } else {

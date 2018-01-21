@@ -147,7 +147,6 @@ void removeFrom(vector <Person> &personer){
         show a message */
         if(it != personer.end()) {
             string signature = it->getSignature();
-            cout << signature << endl;
             personer.erase(it);
             cout << "Personen " << signature << " har tagits bort." << endl;
         }

@@ -26,6 +26,7 @@ void returnToMenu(){
     do {
         cin >> ok;
     } while(ok != 'm');
+    printLine();
 }
 
 
@@ -78,9 +79,9 @@ int printMenu(vector<string> menuChoices){
     int choice = 0;
 
     cout << endl;
-    printLine();
-    cout <<  "Menyval:" << endl;
-    printLine();
+    printStarLine();
+    cout <<  "MENYVAL:" << endl;
+    printStarLine();
     cout << endl;
 
     for(size_t i = 0; i < menuChoices.size(); i++){
@@ -102,7 +103,7 @@ int printMenu(vector<string> menuChoices){
 }
 
 void printHeadlines(){
-    cout << setw(15) << left << "Nr" << setw(18) << left << "Sign" << setw(29) << left << fixed << "Name" << setw(10) << right << "Length [m]" << endl;
+    cout << setw(15) << left << "Nr" << setw(18) << left << "Sign" << setw(29) << left << fixed << "Name" << setw(10) << right << "Height [m]" << endl;
     printLine();
 }
 

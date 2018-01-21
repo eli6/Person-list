@@ -106,7 +106,8 @@ void readFromFile(vector <Person> &personer){
         string decryptedString;
         Person nyPerson;
         int line = 0;
-        //Decrypt every line in the file and add as new person to vector personer
+        /*Try to decrypt each line and add a new person to the vector.
+        Catch the exeption if the length is unreasonable */
         try {
             while (getline(inFile, encryptedString)) {
                 nyPerson = decryptPerson(encryptedString, encryptionKey);
