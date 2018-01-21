@@ -75,7 +75,7 @@ void saveToFile(vector <Person> personer){
     cin >> fileName;
     cout << "Ange krypteringsnyckel" << endl;
     int encryptionKey;
-    cin >> encryptionKey;
+    inputAndCheckIfInt(encryptionKey);
     string encryptedString;
     ofstream outFile(fileName.c_str());
     //Encrypt every person in the vector and print to file
@@ -97,7 +97,7 @@ void readFromFile(vector <Person> &personer){
     cin >> fileName;
     cout << "Ange ursprunglig krypteringsnyckel (positivt tal)" << endl;
     int encryptionKey;
-    cin >> encryptionKey;
+    inputAndCheckIfInt(encryptionKey);
     ifstream inFile(fileName);
     if(inFile){
         found = true;
