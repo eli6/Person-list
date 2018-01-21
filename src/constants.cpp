@@ -7,6 +7,9 @@ void Person::lowercase() {
     for(auto &c: lastName){
         c = static_cast<char>(tolower(c));
     }
+    for(auto &c: signature){
+        c = static_cast<char>(tolower(c));
+    }
 }
 
 void Person::addSignature(vector<Person> personer){

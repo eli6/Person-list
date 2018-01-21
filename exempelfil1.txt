@@ -1,0 +1,28 @@
+Johan,Johannasson,johjoh01,1.700000
+Madeleine,Madeleinsson,madmad01,1.820000
+Bert,Bertsson,berber01,1.800000
+Superperson,Superpersonsson,supsup01,1.300000
+Hanna,von Trapp,hanvon01,1.100000
+Riita,von Trapp,riivon01,1.300000
+Fido,Fidosson,fidfid01,1.730000
+Filippa,von Supertrapp,filvon01,1.700000
+Adam,Adamsson,adaada01,1.100000
+Malin,Malinsson,malmal01,1.340000
+Miika,Miikasson,miimii01,1.000000
+Angelica,Angelicasson,angang01,1.400000
+Bob,Dator,bobdat01,1.700000
+Alice,Dator,alidat01,1.700000
+Robert,Router,robrou01,1.550000
+Robert,Routersson,robrou01,1.540000
+Malin,Processordotter,malpro01,1.890000
+Linux,Windowsson,linwin01,1.300000
+Windows,Linuxsson,winlin01,1.200000
+Steve,Jobsson,stejob01,1.340000
+Bob,Gatesson,bobgat01,1.900000
+Bob,Dylan,bobdyl01,1.600000
+Bob,Dator,bobdat02,1.340000
+BOB,DATOR,bobdat03,1.200000
+BoB,DaToR,bobdat04,0.550000
+Liselott Johanna,Andersson,lisand01,1.450000
+liselott,ANDERSSON,lisand02,1.500000
+Johanna,Johannasson,johjoh02,1.450000

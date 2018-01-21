@@ -13,3 +13,5 @@ cmake-build-debug/*
 /nyfil.txt
 
 .DS_Store
+
+/src.zip

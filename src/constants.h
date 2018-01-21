@@ -18,9 +18,22 @@
             string lastName;
             string signature;
             float height;
+
         public:
-            void setFirstName(string s) { firstName = s; }
-            void setLastName(string s) { lastName = s; }
+            void setFirstName(string s) {
+                if(s.size() < 1){
+                    throw invalid_argument("För kort namn");
+                } else {
+                    firstName = s;
+                }
+            }
+            void setLastName(string s) {
+                if(s.size() < 1){
+                    throw invalid_argument("För kort namn");
+                } else {
+                    lastName = s;
+                }
+            }
             void setHeight(float h) {
                 //Kontrollera att längden är rimlig (inte över 3 m). Undantag isåfall
                 if(h > 3){
@@ -29,8 +42,8 @@
                    height = h;
                }
             }
-            void setSignature(string s) { signature = s; }
 
+            void setSignature(string s) { signature = s; }
             string getFirstName() const { return firstName; }
             string getLastName() const { return lastName; }
             string getSignature() const { return signature;}
@@ -44,10 +57,18 @@
     //Antal personer som visas samtidigt i listan
     const int MAX_PERSONS_IN_LIST = 20;
 
+    //Enum for types of sorting of the list
     enum SortType {
         name,
         signature,
         height
+    };
+
+    //Enum for the different user-settable property types of the object
+    enum PropertyType {
+        firstNameProperty,
+        secondNameProperty,
+        heightProperty
     };
 
     const char DELIM = ',';

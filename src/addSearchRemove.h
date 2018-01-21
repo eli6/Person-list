@@ -12,7 +12,15 @@
     */
     bool areIdentical(Person p1, Person p2);
 
+    /**
+      Frågar efter för- eller efternamn och fångar upp undantaget om namnet är för kort.
+      Lägger sedan till namnet som för- eller efternamn till en person
 
+      @param p : personen
+      @param nameNumber : förnamn (1), eller efternamn (2)
+      @param inputMessage : meddelandet till användaren vid inmatning
+    */
+    void setPropertyAndCatchException(Person &p, PropertyType type, string inputMessage);
     /**
       Lägger till en person i listan med personer
 

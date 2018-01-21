@@ -12,6 +12,42 @@ bool areIdentical(Person p1, Person p2){
         p1.getHeight() == p2.getHeight();
 }
 
+void setPropertyAndCatchException(Person &p, PropertyType type, string inputMessage){
+
+    string nameVariable;
+    float heightVariable;
+
+    bool success = false;
+    do {
+        //Försöker sätta egenskapen och fångar undantaget om detta inte går.
+        try {
+            cout << inputMessage << endl;
+            //använder motsvarande medlems-setter för att sätta egenskapen
+            switch(type) {
+            case firstNameProperty:
+                getline(cin, nameVariable);
+                p.setFirstName(nameVariable);
+                success = true;
+                break;
+            case secondNameProperty:
+                getline(cin, nameVariable);
+                p.setLastName(nameVariable);
+                success = true;
+                break;
+            case height:
+                inputAndCheckIfFloat(heightVariable);
+                p.setHeight(heightVariable);
+                success = true;
+            default:
+                break;
+            }
+        } catch (exception const &e) {
+            //Skriver ut setterns eventuella felmeddelande
+            cout << e.what() << endl;
+        }
+    } while(!success);
+}
+
 void addPersonTo(vector<Person> &personer){
 
     Person newPerson;
@@ -21,30 +57,11 @@ void addPersonTo(vector<Person> &personer){
         do {
             finished = false;
             //----------------------------------------------------------------------------
-            // User enters newPerson data
+            // User enters newPerson data. Possible exceptions are caught in this function
             //----------------------------------------------------------------------------
-            string firstName;
-            string lastName;
-            float height;
-
-            cout << "Ange personens förnamn: " << endl;
-            getline(cin, firstName);
-            newPerson.setFirstName(firstName);
-            cout << "Ange efternamn: " << endl;
-            getline(cin, lastName);
-            newPerson.setLastName(lastName);
-
-            bool success = false;
-            do {
-                try {
-                    cout << "Ange personens längd [m]: " << endl;
-                    inputAndCheckIfFloat(height);
-                    newPerson.setHeight(height);
-                    success = true;
-                } catch (exception const &e) {
-                    cout << "Ange längden igen";
-                }
-            } while(!success);
+            setPropertyAndCatchException(newPerson, firstNameProperty, "Ange förnamn :");
+            setPropertyAndCatchException(newPerson, secondNameProperty, "Ange efternamn :");
+            setPropertyAndCatchException(newPerson, heightProperty, "Ange längd :");
 
             //----------------------------------------------------------------------------
             // Checks if the new person is unique.
@@ -74,7 +91,6 @@ void addPersonTo(vector<Person> &personer){
                         //Sets variable that lets us continue in this loop to add data
                         finished = false;
                     } else if(choice == 2) {
-                        cout << "choice 2" << endl;
                         finished = true;
                     }
                 } else {
@@ -99,13 +115,18 @@ void addPersonTo(vector<Person> &personer){
 vector<Person>::const_iterator findIndexWithSignatureIn(vector <Person> &personer){
 
     string signature;
-    //hej
     cout << "Ange signaturen för personen: " << endl;
     cin >> signature;
+    //Make signature lowercase for comparison
+    for(auto &c: signature){
+        c = static_cast<char>(tolower(c));
+    }
     printLine();
 
     auto it =
-    find_if(personer.begin(), personer.end(), [&signature](Person &p) {
+    find_if(personer.begin(), personer.end(), [&signature](Person p) {
+        //Make compared person lowercase.
+        p.lowercase();
         //Try to find a person with that signature
         return p.getSignature() == signature;
 

@@ -56,15 +56,15 @@ Person decryptPerson(string encryptedString, int steps){
     }
     //Create a new person with the data extracted from the decrypted string
     Person nyPerson;
-    nyPerson.setFirstName(removeSubstring(personInfo, DELIM));
-    nyPerson.setLastName(removeSubstring(personInfo, DELIM));
-    nyPerson.setSignature(removeSubstring(personInfo, DELIM));
 
     //Set height using conversion from string to float and catch exception if this fails
     try {
-       nyPerson.setHeight(stof(removeSubstring(personInfo, DELIM)));
+        nyPerson.setFirstName(removeSubstring(personInfo, DELIM));
+        nyPerson.setLastName(removeSubstring(personInfo, DELIM));
+        nyPerson.setSignature(removeSubstring(personInfo, DELIM));
+        nyPerson.setHeight(stof(removeSubstring(personInfo, DELIM)));
     } catch (exception const &e) {
-       throw;
+        throw;
     }
     return nyPerson;
 }
@@ -116,7 +116,7 @@ void readFromFile(vector <Person> &personer){
             inFile.close();
             cout << "Filen lästes in." << endl;
         } catch (exception const &e) {
-            cout << "Orimlig längd på person hittades i filen." << endl;
+            cout << "Orimlig data för personer hittades i filen." << endl;
             cout << "Inmatningen avbryts. Kontrollera att du angav rätt krypteringsnyckel" << endl;
             cout << "Inmatade data raderas" << endl;
             personer.clear();
