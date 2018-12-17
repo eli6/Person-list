@@ -1,2 +1,2 @@
-#Slutprojekt
-Slutprojekt i c++-kursen
+# Final project
+Final project in C++ course.
